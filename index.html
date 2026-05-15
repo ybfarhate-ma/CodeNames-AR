@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>كودنيمز عربية</title>
+    
+    <!-- التحميل المسبق لصور البطاقات الأساسية لتسريع ظهورها -->
+    <link rel="preload" href="/spy_card1.webp" as="image">
+    <link rel="preload" href="/spy_card2.webp" as="image">
+    <link rel="preload" href="/spymaster_card1.webp" as="image">
+    <link rel="preload" href="/spymaster_card2.webp" as="image">
+
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0B0B0F" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#F5F5F7" media="(prefers-color-scheme: light)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" href="/assets/icons/icon-192.webp" />
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.webp">
+  </head>
+  <body>
+    <script>
+      // Capture PWA install prompt immediately
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        window.__deferredPrompt = e;
+      });
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(error => {
+            console.error('ServiceWorker registration failed: ', error);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
+
